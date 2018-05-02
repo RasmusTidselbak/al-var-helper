@@ -1,19 +1,22 @@
 {
 	"name": "al-var-helper",
-	"description": "Al Var Helper Client",
+	"displayName": "AL Variable Helper",
+	"description": "Intellisense to assign correct variable names in AL.",
 	"author": "Rasmus Aaen",
 	"license": "MIT",
-	"version": "1.0.0",
+	"version": "1.0.3",
 	"publisher": "rasmus",
+	"icon": "images/logo128.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/RasmusTidselbak/al-var-helper"
 	},
 	"engines": {
 		"vscode": "^1.22.0"
 	},
 	"categories": [
-		"Other"
+		"Other",
+		"Snippets"
 	],
 	"contributes": {
 		"snippets": [
