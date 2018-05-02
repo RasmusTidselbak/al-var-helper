@@ -1,5 +1,5 @@
 VS Code extension for variable handling in AL.
-![Example](./images/example.gif)
+![Example](https://raw.githubusercontent.com/RasmusTidselbak/al-var-helper/master/client/images/example.gif)
 
 ### Features
 - Records
