@@ -1,0 +1,39 @@
+{
+	"Variable: Record": {
+		"prefix": "trecord",
+		"body": [
+			"${3:v}: Record ${1}${2: temporary};"
+		],
+		"description": "Insert a new record variable"
+	},
+	"Variable: Codeunit": {
+		"prefix": "tcodeunit",
+		"body": [
+			"${2:v}: Codeunit ${1};"
+		],
+		"description": "Insert a new Codeunit variable"
+	},
+	"Variable: Report": {
+		"prefix": "treport",
+		"body": [
+			"${2:v}: Report ${1};"
+		],
+		"description": "Insert a new Report variable"
+	},
+	"Variable: Query": {
+		"prefix": "tquery",
+		"body": [
+			"${2:v}: Query ${1};"
+		],
+		"description": "Insert a new query variable"
+	},
+	"Variable: Page": {
+		"prefix": "tpage",
+		"body": [
+			"${2:v}: Page ${1};"
+		],
+		"description": "Insert a new page variable"
+	}
+
+	
+}
