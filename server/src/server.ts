@@ -68,7 +68,7 @@ connection.onCompletion(
     txtdoc = documents.get(_textDocumentPosition.textDocument.uri);
     let fullDoc = txtdoc.getText();
     let line: string = txtdoc.getText({
-      start: { line: _textDocumentPosition.position.line, character: 0 },
+      start: { line: _textDocumentPosition.position.line, character: _textDocumentPosition.position.character },
       end: {
         line: _textDocumentPosition.position.line,
         character: Number.MAX_VALUE
@@ -149,6 +149,8 @@ connection.onCompletion(
       });
 
       short = line.replace(/"/g, "");
+      words = short.match(/[A-Z][a-z]+/g); // split CollectionOfWords into single words
+      short = words.join(" ");
       words = short.split(" ");
 
       words.forEach((word, i) => {
@@ -219,8 +221,12 @@ connection.onCompletion(
           case "ASSEMBLY":
             words[i] = "Asm";
             break;
-          case "ASSEMBLE TO ORDER":
-            words[i] = "ATO";
+          case "ASSEMBLE":
+            if (words[i + 1].toUpperCase() === "TO" && words[i + 2].toUpperCase() === "ORDER") {
+              words[i] = "ATO";
+              words[i + 1] = "";
+              words[i + 2] = ""
+            }
             break;
           case "ASSIGNMENT":
             words[i] = "Assgnt";
@@ -249,8 +255,13 @@ connection.onCompletion(
           case "BALANCE":
             words[i] = "Bal";
             break;
-          case "BILL OF MATERIALS":
-            words[i] = "BOM";
+          case "BILL":
+            if (words[i + 1].toUpperCase() === "OF" && words[i + 2].toUpperCase() === "MATERIALS") {
+              words[i] = "BOM";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            }
+
             break;
           case "BLANKET":
             words[i] = "Blnkt";
@@ -262,10 +273,13 @@ connection.onCompletion(
             words[i] = "Buf";
             break;
           case "BUSINESS":
-            words[i] = "Bus";
-            break;
-          case "BUSINESS INTERACTION MANAGEMENT":
-            words[i] = "BIM";
+            if (words[i + 1].toUpperCase() === "INTERACTION" && words[i + 2].toUpperCase() === "MANAGEMENT") {
+              words[i] = "BIM";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            } else {
+              words[i] = "Bus";
+            }
             break;
           case "BUYING":
             words[i] = "Buy";
@@ -283,10 +297,13 @@ connection.onCompletion(
             words[i] = "Cal";
             break;
           case "CAPACITY":
-            words[i] = "Cap";
-            break;
-          case "CAPACITY REQUIREMENTS PLANNING":
-            words[i] = "CRP";
+            if (words[i + 1].toUpperCase() === "REQUIREMENTS" && words[i + 2].toUpperCase() === "PLANNING") {
+              words[i] = "CRP";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            } else {
+              words[i] = "Cap";
+            }
             break;
           case "CASH FLOW":
             words[i] = "CF";
@@ -300,8 +317,13 @@ connection.onCompletion(
           case "CATEGORY":
             words[i] = "Cat";
             break;
-          case "CENTRAL PROCESSING UNIT":
-            words[i] = "CPU";
+          case "CENTRAL":
+            if (words[i + 1].toUpperCase() === "PROCESSING" && words[i + 2].toUpperCase() === "UNIT") {
+              words[i] = "CPU";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            }
+
             break;
           case "CENTER":
             words[i] = "Ctr";
@@ -438,8 +460,14 @@ connection.onCompletion(
           case "DAMPENER":
             words[i] = "Damp";
             break;
-          case "DATABASE MANAGEMENT SYSTEM":
-            words[i] = "DBMS";
+          case "DATABASE":
+            if (words[i + 1].toUpperCase() === "MANAGEMENT" && words[i + 2].toUpperCase() === "SYSTEM") {
+              words[i] = "DBMS";
+              words[i + 1] = "";
+              words[i + 2] = ""
+            } else {
+              words[i] = "DB";
+            }
             break;
           case "DATE":
             words[i] = "D";
@@ -558,8 +586,11 @@ connection.onCompletion(
           case "FINISHED":
             words[i] = "Fnshd";
             break;
-          case "FIXED ASSET":
-            words[i] = "FA";
+          case "FIXED":
+            if (words[i + 1].toUpperCase() === "ASSET") {
+              words[i] = "FA";
+              words[i + 1] = "";
+            }
             break;
           case "FORWARD":
             words[i] = "Fwd";
@@ -568,10 +599,12 @@ connection.onCompletion(
             words[i] = "Frt";
             break;
           case "GENERAL":
+            if (words[i + 1].toUpperCase() === "LEDGER") {
+              words[i] = "GL";
+              words[i + 1] = "";
+            } else{
             words[i] = "Gen";
-            break;
-          case "GENERAL LEDGER":
-            words[i] = "GL";
+            }
             break;
           case "GROUP":
             words[i] = "Gr";
@@ -585,8 +618,11 @@ connection.onCompletion(
           case "HOLIDAY":
             words[i] = "Hol";
             break;
-          case "HUMAN RESOURCE":
-            words[i] = "HR";
+          case "HUMAN":
+            if (words[i + 1].toUpperCase() === "RESOURCE") {
+              words[i] = "HR";
+              words[i + 1] = "";
+            }
             break;
           case "IDENTIFICATION":
             words[i] = "ID";
@@ -607,7 +643,11 @@ connection.onCompletion(
             words[i] = "Incmg";
             break;
           case "INDEPENDENT SOFTWARE VENDOR":
-            words[i] = "ISV";
+            if (words[i + 1].toUpperCase() === "SOFTWARE" && words[i + 2].toUpperCase() == "VENDOR") {
+              words[i] = "ISV";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            }
             break;
           case "INDUSTRY":
             words[i] = "Indust";
@@ -633,8 +673,11 @@ connection.onCompletion(
           case "INTERIM":
             words[i] = "Intm";
             break;
-          case "INTERNAL PROTOCOL":
-            words[i] = "IP";
+          case "INTERNAL":
+            if (words[i + 1].toUpperCase() === "PROTOCOL") {
+              words[i] = "IP";
+              words[i + 1] = "";
+            }
             break;
           case "INVENTORY":
             words[i] = "Invt";
@@ -669,8 +712,11 @@ connection.onCompletion(
           case "LIST":
             words[i] = "Lt";
             break;
-          case "LOCAL CURRENCY":
-            words[i] = "LCY";
+          case "LOCAL":
+            if (words[i+1].toUpperCase() === "CURRENCY") {
+              words[i] = "LCY";
+              words[i+1] = ""; 
+            }
             break;
           case "LOCATION":
             words[i] = "Loc";
@@ -808,10 +854,12 @@ connection.onCompletion(
             words[i] = "Prod";
             break;
           case "PRODUCTION":
-            words[i] = "Prod";
-            break;
-          case "PRODUCTION":
-            words[i] = "| ProdOrd";
+            if (words[i + 1].toUpperCase() === "ORDER") {
+              words[i] = "ProdOrd";
+              words[i + 1] = "";
+            } else  {
+            words[i] = "Prod"
+            }
             break;
           case "PROJECT":
             words[i] = "Proj";
@@ -820,7 +868,7 @@ connection.onCompletion(
             words[i] = "Prop";
             break;
           case "PROSPECT":
-            words[i] = "Prspct&nbsp;&nbsp";
+            words[i] = "Prspct";
             break;
           case "PURCHASE":
             words[i] = "Purch";
@@ -999,8 +1047,13 @@ connection.onCompletion(
           case "ROUTINE":
             words[i] = "Rout";
             break;
-          case "SALES AND RECEIVABLES":
-            words[i] = "Sales";
+          case "SALES":
+            if (words[i + 1].toUpperCase() === "AND" && words[i + 2].toUpperCase() === "RECEIVABLES") {
+              words[i] = "Sales";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            }
+
             break;
           case "SAFETY":
             words[i] = "Saf";
@@ -1024,10 +1077,13 @@ connection.onCompletion(
             words[i] = "Seq";
             break;
           case "SERIAL":
+            if (words[i + 1].toUpperCase() === "NUMBER") {
+              words[i] = "SN";
+              words[i + 1] = "";
+            } else  {
+              
             words[i] = "Ser";
-            break;
-          case "SERIAL NUMBER":
-            words[i] = "SN";
+            }
             break;
           case "SERVICE":
             words[i] = "Serv";
@@ -1074,8 +1130,12 @@ connection.onCompletion(
           case "STREAM":
             words[i] = "Stm";
             break;
-          case "STRUCTURED QUERY LANGUAGE":
-            words[i] = "SQL";
+          case "STRUCTURED":
+            if (words[i + 1].toUpperCase() === "QUERY" && words[i + 2].toUpperCase() === "LANGUAGE") {
+              words[i] = "SQL";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            }
             break;
           case "SUBCONTRACT":
             words[i] = "Subcontr";
@@ -1137,11 +1197,15 @@ connection.onCompletion(
           case "TROUBLESHOOTING":
             words[i] = "Tblshtg";
             break;
-          case "UNIT OF MEASURE":
-            words[i] = "UOM";
-            break;
-          case "UNIT TEST":
-            words[i] = "UT";
+          case "UNIT":
+            if (words[i + 1].toUpperCase() === "OF" && words[i + 2].toUpperCase() === "MEASURE") {
+              words[i] = "UoM";
+              words[i + 1] = "";
+              words[i + 2] = "";
+            } else if (words[i+1].toUpperCase() === "TEST") {
+              words[i] = "UT";
+              words[i+1] = "";
+            }
             break;
           case "UNREALIZED":
             words[i] = "Unreal";
@@ -1155,11 +1219,14 @@ connection.onCompletion(
           case "VALUATION":
             words[i] = "Valn";
             break;
-          case "VALUE":
-            words[i] = "Val";
-            break;
           case "VALUE ADDED TAX":
+            if (words[i+1].toUpperCase() === "ADDED" && words[i+2].toUpperCase() === "TAX") {
             words[i] = "VAT";
+            words[i+1] = "";
+            words[i+2] = "";
+            } else {
+            words[i] = "Val";
+            }
             break;
           case "VARIANCE":
             words[i] = "Var";
@@ -1170,8 +1237,13 @@ connection.onCompletion(
           case "WAREHOUSE":
             words[i] = "Whse";
             break;
-          case "WEB SERVICE":
+          case "WEBSERVICE":
+          case "WEB":
             words[i] = "WS";
+
+            if (words[i+1].toUpperCase() === "SERVICE") {
+              words[i+1] = "";
+            }
             break;
           case "WORKSHEET":
             words[i] = "Wksh";
@@ -1184,8 +1256,11 @@ connection.onCompletion(
           case "3-TIER":
             words[i] = "Three-Tier";
             break;
-          case "OUTLOOK SYNCH":
-            words[i] = "Osynch";
+          case "OUTLOOK":
+            if (words[i+1].toUpperCase() === "SYNCH") {
+              words[i] = "Osynch";
+              words[i+1] = ""; 
+            }
             break;
         }
       });
