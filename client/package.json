@@ -24,6 +24,26 @@
 				"language": "al",
 				"path": "./snippets/al.json"
 			}
+		],
+		"commands": [
+			{
+				"command": "alvarhelper.LocalVars",
+				"title": "Local Variables"
+			},
+			{
+				"command": "alvarhelper.GlobalVars",
+				"title": "Global Variables"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "alvarhelper.GlobalVars",
+				"key": "ctrl+g"
+			},
+			{
+				"command": "alvarhelper.LocalVars",
+				"key": "ctrl+l"
+			}
 		]
 	},
 	"activationEvents": [
