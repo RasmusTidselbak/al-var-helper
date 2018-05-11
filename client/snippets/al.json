@@ -2,70 +2,108 @@
 	"Variable: Record": {
 		"prefix": "Record",
 		"body": [
-			"${3:v}: Record ${1}${2: temporary};"
+			"${3:v}: Record ${1}${2: temporary};$0"
 		],
 		"description": "Insert a new record variable"
 	},
 	"Variable: Codeunit": {
 		"prefix": "Codeunit",
 		"body": [
-			"${2:v}: Codeunit ${1};"
+			"${2:v}: Codeunit ${1};$0"
 		],
 		"description": "Insert a new Codeunit variable"
 	},
 	"Variable: Report": {
 		"prefix": "Report",
 		"body": [
-			"${2:v}: Report ${1};"
+			"${2:v}: Report ${1};$0"
 		],
 		"description": "Insert a new Report variable"
 	},
 	"Variable: Query": {
 		"prefix": "Query",
 		"body": [
-			"${2:v}: Query ${1};"
+			"${2:v}: Query ${1};$0"
 		],
 		"description": "Insert a new query variable"
 	},
 	"Variable: Page": {
 		"prefix": "Page",
 		"body": [
-			"${2:v}: Page ${1};"
+			"${2:v}: Page ${1};$0"
 		],
 		"description": "Insert a new page variable"
 	},
+	"Variable: Decimal":{
+		"prefix": "Decimal",
+		"body":[
+			"${1:myDecimal}: Decimal;$0"
+		]
+	},
+	"Variable: Integer":{
+		"prefix": "Integer",
+		"body":[
+			"${1:myInteger}: Integer;$0"
+		]
+	},
+	"Variable: Code":{
+		"prefix": "Code",
+		"body":[
+			"${2:myCode}: Code[${1:20}];$0"
+		]
+	},
+	"Variable: Text":{
+		"prefix": "Text",
+		"body":[
+			"${3:myText}: Text${1:[${2:20}]};$0"
+		]
+	},
+	"Variable: Char":{
+		"prefix": "Char",
+		"body":[
+			"${1:myChar}: Char;$0"
+		]
+	},
+	"Variable: Boolean":{
+		"prefix": "Boolean",
+		"body":[
+			"${1:myBoolean}: Boolean;$0"
+		]
+	},
+
+
 	"Variable Template: Record": {
 		"prefix": "trecord",
 		"body": [
-			"${3:v}: Record ${1}${2: temporary};"
+			"${3:v}: Record ${1}${2: temporary};$0"
 		],
 		"description": "Insert a new record variable"
 	},
 	"Variable Template: Codeunit": {
 		"prefix": "tcodeunit",
 		"body": [
-			"${2:v}: Codeunit ${1};"
+			"${2:v}: Codeunit ${1};$0"
 		],
 		"description": "Insert a new Codeunit variable"
 	},
 	"Variable Template: Report": {
 		"prefix": "treport",
 		"body": [
-			"${2:v}: Report ${1};"
+			"${2:v}: Report ${1};$0"
 		],
 		"description": "Insert a new Report variable"
 	},
 	"Variable Template: Query": {
 		"prefix": "tquery",
 		"body": [
-			"${2:v}: Query ${1};"
+			"${2:v}: Query ${1};$0"
 		],
 		"description": "Insert a new query variable"
 	},
 	"Variable Template: Page": {
 		"prefix": "tpage",
 		"body": [
-			"${2:v}: Page ${1};"
+			"${2:v}: Page ${1};$0"
 		],
 		"description": "Insert a new page variable"
 	}

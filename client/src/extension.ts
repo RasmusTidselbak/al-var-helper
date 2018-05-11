@@ -2,7 +2,7 @@
 
 import * as path from 'path';
 
-import { workspace, ExtensionContext, commands, window, Selection, Range } from 'vscode';
+import { workspace, ExtensionContext, commands, window, Selection, Range, Position } from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient';
 
 export function activate(context: ExtensionContext) {
@@ -38,19 +38,23 @@ export function activate(context: ExtensionContext) {
 		let selectedRange: Range = editor.selection;
 		let lastline: number = selectedRange.end.line;
 		let varLine: number = -1;
-		for (let i = lastline; i > 0; i--) {
+		for (let i = lastline; i >= 0; i--) {
 			let currLine = editor.document.lineAt(i);
 			let currLineText = currLine.text.trim()
 			if (currLineText.toUpperCase() === "VAR") {
 				varLine = i;
 				break;
+			} else if (currLineText.toUpperCase().indexOf("TRIGGER") >= 0 || currLineText.toUpperCase().indexOf("PROCEDURE") >= 0) {
+				break;
 			}
 		}
 
-		if (varLine > 0) {
+		if (varLine >= 0) {
 			let range = editor.document.lineAt(varLine).range;
 			editor.selection = new Selection(range.end, range.end);
-			editor.revealRange(range);
+			let revealRange = new Range(new Position(range.end.line - 10, 0), new Position(range.end.line + 10, 0));
+			editor.revealRange(revealRange);
+			
 		}
 	});
 
@@ -64,7 +68,7 @@ export function activate(context: ExtensionContext) {
 		for (let i = 0; i < editor.document.lineCount; i++) {
 			let currLine = editor.document.lineAt(i);
 			let currLineText = currLine.text.trim();
-			if (currLineText.toUpperCase().indexOf("TRIGGER") > 0 || currLineText.toUpperCase().indexOf("PROCEDURE") > 0) {
+			if (currLineText.toUpperCase().indexOf("TRIGGER") >= 0 || currLineText.toUpperCase().indexOf("PROCEDURE") >= 0) {
 				ignoreNext = true;
 			} else if (currLineText.toUpperCase() === "VAR") {
 				if (ignoreNext) {
@@ -74,16 +78,17 @@ export function activate(context: ExtensionContext) {
 					break;
 				}
 
-			} else if (currLineText.toUpperCase().indexOf("BEGIN") > 0) {
+			} else if (currLineText.toUpperCase().indexOf("BEGIN") >= 0) {
 				ignoreNext = false;
 			}
 
 		}
 
-		if (editor && varLine > 0) {
+		if (editor && varLine >= 0) {
 			let range = editor.document.lineAt(varLine).range;
 			editor.selection = new Selection(range.end, range.end);
-			editor.revealRange(range);
+			let revealRange = new Range(new Position(range.end.line - 10, 0), new Position(range.end.line + 10, 0));
+			editor.revealRange(revealRange);
 		}
 	});
 
