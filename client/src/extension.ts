@@ -2,7 +2,7 @@
 
 import * as path from 'path';
 
-import { workspace, ExtensionContext, commands, window, Selection } from 'vscode';
+import { workspace, ExtensionContext, commands, window, Selection, Range } from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient';
 
 export function activate(context: ExtensionContext) {
@@ -34,12 +34,22 @@ export function activate(context: ExtensionContext) {
 
 	let localVarDisp = commands.registerCommand('alvarhelper.LocalVars', () => {
 		let editor = window.activeTextEditor;
-		// if the current line is not procedure or trigger
-		// look backwards until you find var/procedure/trigger and set the editor here
 
-		if (editor) {
-			let range = editor.document.lineAt(5).range;
-			editor.selection = new Selection(range.start, range.end);
+		let selectedRange: Range = editor.selection;
+		let lastline: number = selectedRange.end.line;
+		let varLine: number = -1;
+		for (let i = lastline; i > 0; i--) {
+			let currLine = editor.document.lineAt(i);
+			let currLineText = currLine.text.trim()
+			if (currLineText.toUpperCase() === "VAR") {
+				varLine = i;
+				break;
+			}
+		}
+
+		if (varLine > 0) {
+			let range = editor.document.lineAt(varLine).range;
+			editor.selection = new Selection(range.end, range.end);
 			editor.revealRange(range);
 		}
 	});
@@ -48,11 +58,31 @@ export function activate(context: ExtensionContext) {
 
 	let globalVarDisp = commands.registerCommand("alvarhelper.GlobalVars", () => {
 		// look for var with no trigger og procedure before it
-
 		let editor = window.activeTextEditor;
-		if (editor) {
-			let range = editor.document.lineAt(5).range;
-			editor.selection = new Selection(range.start, range.end);
+		let varLine: number = -1;
+		let ignoreNext: boolean = false;
+		for (let i = 0; i < editor.document.lineCount; i++) {
+			let currLine = editor.document.lineAt(i);
+			let currLineText = currLine.text.trim();
+			if (currLineText.toUpperCase().indexOf("TRIGGER") > 0 || currLineText.toUpperCase().indexOf("PROCEDURE") > 0) {
+				ignoreNext = true;
+			} else if (currLineText.toUpperCase() === "VAR") {
+				if (ignoreNext) {
+					ignoreNext = false;
+				} else {
+					varLine = i;
+					break;
+				}
+
+			} else if (currLineText.toUpperCase().indexOf("BEGIN") > 0) {
+				ignoreNext = false;
+			}
+
+		}
+
+		if (editor && varLine > 0) {
+			let range = editor.document.lineAt(varLine).range;
+			editor.selection = new Selection(range.end, range.end);
 			editor.revealRange(range);
 		}
 	});
