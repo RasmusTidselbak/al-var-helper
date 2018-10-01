@@ -1297,6 +1297,31 @@ connection.onCompletion(
             case "MASTER":
               words[i] = "Mr";
               break;
+            case "SUBTRACT":
+              words[i] = "Subt";
+              break;
+            case "PERMISSION":
+              words[i] = "Perm";
+              break;
+            case "RANDOM":
+              words[i] = "Rnd";
+              break;
+            case "SUBSCRIBER":
+            case "SUBSCRIBE":
+              words[i] = "Sub";
+              break;
+            case "LEASING":
+              words[i] = "Lease";
+              break;
+            case "LOCAL":
+              words[i] = "Lcl";
+              break;
+            case "INITIALIZATION":
+              words[i] = "Init";
+              break;
+            case "MANAGER":
+              words[i] = "Mgr";
+              break;
             
         }
       });
