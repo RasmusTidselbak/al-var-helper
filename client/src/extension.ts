@@ -45,6 +45,9 @@ export function activate(context: ExtensionContext) {
 				varLine = i;
 				break;
 			} else if (currLineText.toUpperCase().indexOf("TRIGGER") >= 0 || currLineText.toUpperCase().indexOf("PROCEDURE") >= 0) {
+				if (i === lastline) {
+					varLine = i + 1;
+				}
 				break;
 			}
 		}
