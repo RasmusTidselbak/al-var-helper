@@ -95,7 +95,7 @@ connection.onCompletion(
     if (startPos < 0) {
       startPos = line.toUpperCase().indexOf("REPORT");
       if (startPos >= 0) {
-        startPos += 5;
+        startPos += 6;
       }
     }
 
@@ -1283,6 +1283,21 @@ connection.onCompletion(
           case "FUNCTIONS":
             words[i] = "Func";
             break;
+
+            // New Words
+            case "LIBRARY":
+                words[i] = "Lib";
+                break;
+            case "TEXT":
+              words[i] = "Txt";
+              break;
+            case "CONTENT":
+              words[i] = "Ctnt";
+              break;
+            case "MASTER":
+              words[i] = "Mr";
+              break;
+            
         }
       });
 
