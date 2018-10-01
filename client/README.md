@@ -14,3 +14,8 @@ NB! The extension use the same hotkey as the default VS Code "Go To: Line" featu
 
 ### Report an Issue
 Issues can be reported to the project on [Github](https://github.com/RasmusTidselbak/al-var-helper/issues).
+
+
+### Changelog
+* Fixed a bug with the report template
+* Added words to the list
