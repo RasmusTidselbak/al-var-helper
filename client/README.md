@@ -19,3 +19,4 @@ Issues can be reported to the project on [Github](https://github.com/RasmusTidse
 ### Changelog
 * Fixed a bug with the report template
 * Added words to the list
+* Added prefix management, including new settings variable
