@@ -63,6 +63,7 @@ connection.onCompletion(
     // The pass parameter contains the position of the text document in
     // which code complete got requested. For the example we ignore this
     // info and always provide the same completion items.
+    connection.workspace.getConfiguration('alvarhelp.ignoreALPrefix');
 
     let txtdoc: TextDocument;
     txtdoc = documents.get(_textDocumentPosition.textDocument.uri);
@@ -133,8 +134,20 @@ connection.onCompletion(
       let warn: boolean = false;
 
       line = line.substring(0, endPos);
-      exact = line.trim();
-      exact = exact.replace(/\W/g, "");
+
+      line = line.replace(/"/g, "");
+      line = line.trim();
+
+      ignoreALPrefix.forEach((prefix, i) => {
+        let prefixLine = line.substr(0, prefix.length);
+        if (prefix === prefixLine) {
+          line = line.substr(prefixLine.length);
+        }
+      });
+
+      line = line.trim();
+
+      exact = line.replace(/\W/g, "");
       // exact = exact.replace(/ /g, "");
       if (tempRec) {
         exact = "Temp" + exact;
@@ -154,6 +167,7 @@ connection.onCompletion(
       words = short.split(" ");
 
       words.forEach((word, i) => {
+
         switch (word.toUpperCase()) {
           case "ABSENCE":
             words[i] = "Abs";
@@ -1284,45 +1298,45 @@ connection.onCompletion(
             words[i] = "Func";
             break;
 
-            // New Words
-            case "LIBRARY":
-                words[i] = "Lib";
-                break;
-            case "TEXT":
-              words[i] = "Txt";
-              break;
-            case "CONTENT":
-              words[i] = "Ctnt";
-              break;
-            case "MASTER":
-              words[i] = "Mr";
-              break;
-            case "SUBTRACT":
-              words[i] = "Subt";
-              break;
-            case "PERMISSION":
-              words[i] = "Perm";
-              break;
-            case "RANDOM":
-              words[i] = "Rnd";
-              break;
-            case "SUBSCRIBER":
-            case "SUBSCRIBE":
-              words[i] = "Sub";
-              break;
-            case "LEASING":
-              words[i] = "Lease";
-              break;
-            case "LOCAL":
-              words[i] = "Lcl";
-              break;
-            case "INITIALIZATION":
-              words[i] = "Init";
-              break;
-            case "MANAGER":
-              words[i] = "Mgr";
-              break;
-            
+          // New Words
+          case "LIBRARY":
+            words[i] = "Lib";
+            break;
+          case "TEXT":
+            words[i] = "Txt";
+            break;
+          case "CONTENT":
+            words[i] = "Ctnt";
+            break;
+          case "MASTER":
+            words[i] = "Mr";
+            break;
+          case "SUBTRACT":
+            words[i] = "Subt";
+            break;
+          case "PERMISSION":
+            words[i] = "Perm";
+            break;
+          case "RANDOM":
+            words[i] = "Rnd";
+            break;
+          case "SUBSCRIBER":
+          case "SUBSCRIBE":
+            words[i] = "Sub";
+            break;
+          case "LEASING":
+            words[i] = "Lease";
+            break;
+          case "LOCAL":
+            words[i] = "Lcl";
+            break;
+          case "INITIALIZATION":
+            words[i] = "Init";
+            break;
+          case "MANAGER":
+            words[i] = "Mgr";
+            break;
+
         }
       });
 
@@ -1371,25 +1385,21 @@ connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
   return item;
 });
 
-/*
-connection.onDidOpenTextDocument((params) => {
-	// A text document got opened in VSCode.
-	// params.uri uniquely identifies the document. For documents store on disk this is a file URI.
-	// params.text the initial full content of the document.
-	connection.console.log(`${params.textDocument.uri} opened.`);
+interface Settings {
+  alVarHelper: alVarHelper;
+}
+
+interface alVarHelper {
+  ignoreALPrefix: string;
+}
+
+let ignoreALPrefix: string[];
+//alVarHelper.ignoreALPrefix
+
+connection.onDidChangeConfiguration((change) => {
+  let settings = <Settings>change.settings;
+  ignoreALPrefix = settings.alVarHelper.ignoreALPrefix.split(";") || [];
 });
-connection.onDidChangeTextDocument((params) => {
-	// The content of a text document did change in VSCode.
-	// params.uri uniquely identifies the document.
-	// params.contentChanges describe the content changes to the document.
-	connection.console.log(`${params.textDocument.uri} changed: ${JSON.stringify(params.contentChanges)}`);
-});
-connection.onDidCloseTextDocument((params) => {
-	// A text document got closed in VSCode.
-	// params.uri uniquely identifies the document.
-	connection.console.log(`${params.textDocument.uri} closed.`);
-});
-*/
 
 // Listen on the connection
 connection.listen();
