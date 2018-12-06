@@ -4,6 +4,8 @@ VS Code extension for variable handling in AL.
 ### Features
 - Easy variable assignment
 - Go to global/local variables - like in the C/SIDE environment.
+- Sort Variables
+- Fix keyword casing
 
 ### Usage
 To create a new variable type t + <Object Type> (e.g. trecord).
@@ -17,6 +19,8 @@ Issues can be reported to the project on [Github](https://github.com/RasmusTidse
 
 
 ### Changelog
+* Added function to sort variables
+* Added function to fix keyword casing
 * Fixed a bug with the report template
 * Added words to the list
 * Added prefix management, including new settings variable

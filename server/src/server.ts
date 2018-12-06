@@ -138,7 +138,7 @@ connection.onCompletion(
       line = line.replace(/"/g, "");
       line = line.trim();
 
-      ignoreALPrefix.forEach((prefix, i) => {
+      ignoreALPrefix.forEach((prefix) => {
         let prefixLine = line.substr(0, prefix.length);
         if (prefix === prefixLine) {
           line = line.substr(prefixLine.length);

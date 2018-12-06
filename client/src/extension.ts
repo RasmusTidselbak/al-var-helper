@@ -4,6 +4,8 @@ import * as path from 'path';
 
 import { workspace, ExtensionContext, commands, window, Selection, Range, Position } from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'vscode-languageclient';
+import { VariableHandler } from "./components/variable";
+import { KeywordHandler } from './components/keyword';
 
 export function activate(context: ExtensionContext) {
 
@@ -57,7 +59,7 @@ export function activate(context: ExtensionContext) {
 			editor.selection = new Selection(range.end, range.end);
 			let revealRange = new Range(new Position(range.end.line - 10, 0), new Position(range.end.line + 10, 0));
 			editor.revealRange(revealRange);
-			
+
 		}
 	});
 
@@ -96,6 +98,61 @@ export function activate(context: ExtensionContext) {
 	});
 
 	context.subscriptions.push(globalVarDisp);
+
+
+
+	let fixCasingDisp = commands.registerCommand("alvarhelper.FixCasing", () => {
+		// fixCasing
+		let keywordHandler: KeywordHandler = new KeywordHandler();
+
+		let editor = window.activeTextEditor;
+		let doc: string = editor.document.getText();
+
+		doc = keywordHandler.casing(doc);
+
+		let lines = doc.split(/\r?\n/g);
+
+		editor.edit(
+			function (builder) {
+				lines.forEach((line, i) => {
+					let lineRange: Range = new Range(new Position(i, 0), new Position(i, Number.MAX_VALUE));
+					builder.replace(lineRange, line);
+				});
+			}
+		);
+	});
+	context.subscriptions.push(fixCasingDisp);
+
+	let sortVariablesDisp = commands.registerCommand("alvarhelper.SortVariables", () => {
+		// sortVariables
+		let variableHandler: VariableHandler = new VariableHandler();
+
+		let editor = window.activeTextEditor;
+		let doc: string = editor.document.getText();
+
+		doc = variableHandler.sort(doc);
+
+		let lines = doc.split(/\r?\n/g);
+
+		editor.edit(
+			function (builder) {
+				lines.forEach((line, i) => {
+					let lineRange: Range = new Range(new Position(i, 0), new Position(i, Number.MAX_VALUE));
+					builder.replace(lineRange, line);
+				});
+			}
+		);
+		// lines.forEach((line, i) => {
+		// 	window.activeTextEditor.edit(
+		// 		function (builder) {
+		// 			let lineRange: Range = new Range(new Position(i, 0), new Position(i, Number.MAX_VALUE));
+		// 			builder.replace(lineRange, line);
+		// 		}
+		// 	)
+		// })
+	});
+
+	context.subscriptions.push(sortVariablesDisp);
 
 	// Push the disposable to the context's subscriptions so that the 
 	// client can be deactivated on extension deactivation

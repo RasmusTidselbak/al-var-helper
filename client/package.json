@@ -4,7 +4,7 @@
     "description": "Intellisense to assign correct variable names in AL.",
     "author": "Rasmus Aaen",
     "license": "MIT",
-    "version": "1.4.0",
+    "version": "2.0.0",
     "publisher": "rasmus",
     "icon": "images/logo128.png",
     "repository": {
@@ -28,11 +28,19 @@
         "commands": [
             {
                 "command": "alvarhelper.LocalVars",
-                "title": "Local Variables"
+                "title": "AL-Var: Local Variables"
             },
             {
                 "command": "alvarhelper.GlobalVars",
-                "title": "Global Variables"
+                "title": "AL-Var: Global Variables"
+            },
+            {
+                "command": "alvarhelper.FixCasing",
+                "title": "AL-Var: Fix Casing"
+            },
+            {
+                "command": "alvarhelper.SortVariables",
+                "title": "AL-Var: Sort Variables"
             }
         ],
         "keybindings": [
