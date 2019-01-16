@@ -114,6 +114,13 @@ connection.onCompletion(
       }
     }
 
+    if (startPos < 0) {
+      startPos = line.toUpperCase().indexOf("TESTPAGE");
+      if (startPos >= 0) {
+        startPos += 8;
+      }
+    }
+
     line = line.substring(startPos);
 
     if (startPos >= 0) {
@@ -383,7 +390,7 @@ connection.onCompletion(
             words[i] = "Cmt";
             break;
           case "COMPANY":
-            words[i] = "Co";
+            words[i] = "Comp";
             break;
           case "COMPONENT":
             words[i] = "Comp";

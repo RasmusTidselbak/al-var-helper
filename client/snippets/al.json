@@ -34,6 +34,13 @@
 		],
 		"description": "Insert a new page variable"
 	},
+	"Variable: TestPage": {
+		"prefix": "TestPage",
+		"body": [
+			"${2:v}: TestPage ${1};$0"
+		],
+		"description": "Insert a new test page variable"
+	},
 	"Variable: Decimal":{
 		"prefix": "Decimal",
 		"body":[
@@ -106,6 +113,13 @@
 			"${2:v}: Page ${1};$0"
 		],
 		"description": "Insert a new page variable"
+	},
+	"Variable Template: TestPage": {
+		"prefix": "ttestpage",
+		"body": [
+			"${2:v}: TestPage ${1};$0"
+		],
+		"description": "Insert a new test page variable"
 	}
 
 	

@@ -31,6 +31,12 @@ export class KeywordHandler {
   private initKeywords() {
     this.keywords = [
       "BigText",
+      "DateTime",
+      "Reset",
+      "DeleteAll",
+      "Clear",
+      "Delete",
+      "Validate",
       "Blob",
       "Codeunit",
       "DateFormula",

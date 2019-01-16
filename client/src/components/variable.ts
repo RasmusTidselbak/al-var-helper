@@ -11,7 +11,7 @@ export class VariableHandler {
     let searching: boolean = false;
     this.lines.forEach((line, i) => {
       // Store first index id
-      if (line.trim() === "var"){
+      if (line.trim() === "var") {
         varIndex = i;
         varArray = [];
         searching = true;
@@ -33,9 +33,9 @@ export class VariableHandler {
               let j: number = i;
               let leadingSpaces: number = 0;
               while (!KeywordHandler.keywordExists(";", line)) {
-                
+
                 // if TextConst exists
-                if(KeywordHandler.keywordExists("TextConst", line)){
+                if (KeywordHandler.keywordExists("TextConst", line)) {
                   leadingSpaces = line.toLowerCase().indexOf("textconst");
                   leadingSpaces += 10;
                 }
@@ -98,6 +98,8 @@ export class VariableHandler {
         return 1470;
       case KeywordHandler.keywordExists("Codeunit", varLine):
         return 1460;
+      case KeywordHandler.keywordExists("Notification", varLine):
+        return 1455;
       case KeywordHandler.keywordExists("Blob", varLine):
         return 1450;
       case KeywordHandler.keywordExists("Dialog", varLine):
@@ -138,6 +140,8 @@ export class VariableHandler {
         return 280;
       case KeywordHandler.keywordExists("Guid", varLine):
         return 250;
+      case KeywordHandler.keywordExists("RecordRef", varLine):
+        return 245;
       case KeywordHandler.keywordExists("InStream", varLine):
         return 240;
       case KeywordHandler.keywordExists("OutStream", varLine):
@@ -148,8 +152,6 @@ export class VariableHandler {
         return 210;
       case KeywordHandler.keywordExists("RecordID", varLine):
         return 200;
-      case KeywordHandler.keywordExists("RecordRef", varLine):
-        return 190;
       case KeywordHandler.keywordExists("System", varLine):
         return 180;
       case KeywordHandler.keywordExists("TableFilter", varLine):
