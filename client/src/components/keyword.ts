@@ -163,7 +163,8 @@ export class KeywordHandler {
       "table",
       "xmlport",
       "query",
-      "report"
+      "report",
+      "FieldCaption"
     ];
   }
   public static keywordExists(keyword: string, words: any): boolean {
