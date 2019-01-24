@@ -25,7 +25,10 @@ export class VariableHandler {
             KeywordHandler.keywordExists("trigger", line) ||
             KeywordHandler.keywordExists("BusinessEvent", line) ||
             KeywordHandler.keywordExists("IntegrationEvent", line) ||
-            KeywordHandler.keywordExists("EventSubscriber", line)
+            KeywordHandler.keywordExists("EventSubscriber", line) ||
+            line.toUpperCase().indexOf("[TEST]") > 0 ||
+            line.toUpperCase().indexOf("[HANDLERFUNCTIONS") > 0  ||
+            line.toUpperCase().indexOf("[MESSAGEHANDLER]") > 0 
           )
         ) {
           if (line.replace(/\s/g, "").length) {

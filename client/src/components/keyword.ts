@@ -1,5 +1,6 @@
 export class KeywordHandler {
   private keywords: string[];
+  private functionKeywords: string[];
 
   public casing(doc: string): string {
     let words: string[] = doc.match(/\/\*[\w\W]*?\*\/|\/\/\/.*|\/\/.*|".+?"|'.+?'|[\w\d]+|\S|\s+/g);
@@ -14,7 +15,13 @@ export class KeywordHandler {
 
       if (level) {
         this.keywords.forEach((keyword) => {
-          word = word.toUpperCase() == keyword.toUpperCase() ? keyword : word;
+          if (word.toUpperCase() == keyword.toUpperCase()) {
+            word = keyword;
+            if (this.functionKeywords.includes(word) && words[i+1] !== "(") {
+              word += "()";
+            }
+          }
+
         });
       } else {
         this.objectTypes().forEach((objectType) => {
@@ -30,12 +37,11 @@ export class KeywordHandler {
 
   private initKeywords() {
     this.keywords = [
+      "Confirm",
+      "Count",
+      "TestField",
       "BigText",
       "DateTime",
-      "Reset",
-      "DeleteAll",
-      "Clear",
-      "Delete",
       "Validate",
       "Blob",
       "Codeunit",
@@ -101,13 +107,7 @@ export class KeywordHandler {
       "TextConst",
       "Error",
       "Message",
-      "FindSet",
-      "FindFirst",
-      "FindLast",
-      "Find",
-      "Next",
       "CalcFields",
-      "HasValue",
       "SetRange",
       "SetFilter",
       "Format",
@@ -115,21 +115,40 @@ export class KeywordHandler {
       "Run",
       "Action",
       "SetTableView",
-      "Update",
-      "Insert",
-      "Modify",
-      "Get",
       "Where",
       "field",
       "SetRecord",
       "GetRecord",
       "LookupMode",
-      "UserId",
       "const",
       "filter",
       "LowerCase",
       "StrSubStNo"
     ];
+    
+    this.functionKeywords = [
+      "Commit",
+      "GuiAllowed",
+      "FindSet",      
+      "FindFirst",
+      "FindLast",
+      "Find",
+      "IsEmpty",
+      "Reset",
+      "DeleteAll",
+      "Clear",
+      "UserId",
+      "Update",
+      "Insert",
+      "Modify",
+      "HasValue",
+      "Next",
+      "Delete",
+      "Init",
+      "Get"
+    ];
+
+    this.keywords = this.keywords.concat(this.functionKeywords);
   }
 
   private objectTypes(): string[] {
