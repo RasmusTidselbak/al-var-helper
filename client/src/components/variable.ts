@@ -27,8 +27,8 @@ export class VariableHandler {
             KeywordHandler.keywordExists("IntegrationEvent", line) ||
             KeywordHandler.keywordExists("EventSubscriber", line) ||
             line.toUpperCase().indexOf("[TEST]") > 0 ||
-            line.toUpperCase().indexOf("[HANDLERFUNCTIONS") > 0  ||
-            line.toUpperCase().indexOf("[MESSAGEHANDLER]") > 0 
+            line.toUpperCase().indexOf("[HANDLERFUNCTIONS") > 0 ||
+            line.toUpperCase().indexOf("[MESSAGEHANDLER]") > 0
           )
         ) {
           if (line.replace(/\s/g, "").length) {
@@ -179,6 +179,8 @@ export class VariableHandler {
         return 80;
       case KeywordHandler.keywordExists("Integer", varLine):
         return 70;
+      case KeywordHandler.keywordExists("Enum", varLine):
+        return 61;
       case KeywordHandler.keywordExists("Option", varLine):
         return 60;
       case KeywordHandler.keywordExists("Text", varLine):
@@ -189,6 +191,8 @@ export class VariableHandler {
         return 30;
       case KeywordHandler.keywordExists("TextConst", varLine):
         return 20;
+      case KeywordHandler.keywordExists("Label", varLine):
+        return 19;
     }
     return 1;
   }

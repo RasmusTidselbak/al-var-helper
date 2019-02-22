@@ -123,7 +123,10 @@ export class KeywordHandler {
       "const",
       "filter",
       "LowerCase",
-      "StrSubStNo"
+      "StrSubStNo",
+      "TextEncoding",
+      "Enum",
+      "Label"
     ];
     
     this.functionKeywords = [
@@ -145,7 +148,13 @@ export class KeywordHandler {
       "Next",
       "Delete",
       "Init",
-      "Get"
+      "Get",
+      "Count",
+      "Skip",
+      "GetFilters",
+      "UseRequestPage",
+      "Preview",
+      "TableCaption"
     ];
 
     this.keywords = this.keywords.concat(this.functionKeywords);
