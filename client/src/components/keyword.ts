@@ -55,7 +55,7 @@ export class KeywordHandler {
       "KeyRef",
       "Page",
       "Record",
-      "RecordID",
+      "RecordId",
       "RecordRef",
       "Report",
       "System",
@@ -80,7 +80,7 @@ export class KeywordHandler {
       "case",
       "div",
       "do",
-      "DownTo",
+      "downto",
       "else",
       "end",
       "exit",
@@ -108,6 +108,7 @@ export class KeywordHandler {
       "Error",
       "Message",
       "CalcFields",
+      "CalcSums",
       "SetRange",
       "SetFilter",
       "Format",
@@ -115,7 +116,7 @@ export class KeywordHandler {
       "Run",
       "Action",
       "SetTableView",
-      "Where",
+      "where",
       "field",
       "SetRecord",
       "GetRecord",
@@ -123,10 +124,21 @@ export class KeywordHandler {
       "const",
       "filter",
       "LowerCase",
-      "StrSubStNo",
+      "StrSubstNo",
       "TextEncoding",
       "Enum",
-      "Label"
+      "Label",
+      "StrLen",
+      "ConvertStr",
+      "CopyStr",
+      "sorting",
+      "Next",
+      "Evaluate",
+      "SelectStr",
+      "Editable",
+      "FieldError",
+      "Round"
+
     ];
     
     this.functionKeywords = [
@@ -143,9 +155,7 @@ export class KeywordHandler {
       "UserId",
       "Update",
       "Insert",
-      "Modify",
       "HasValue",
-      "Next",
       "Delete",
       "Init",
       "Get",
@@ -154,7 +164,8 @@ export class KeywordHandler {
       "GetFilters",
       "UseRequestPage",
       "Preview",
-      "TableCaption"
+      "TableCaption",
+      
     ];
 
     this.keywords = this.keywords.concat(this.functionKeywords);

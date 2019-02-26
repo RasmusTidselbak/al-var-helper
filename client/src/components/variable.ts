@@ -101,6 +101,8 @@ export class VariableHandler {
         return 1470;
       case KeywordHandler.keywordExists("Codeunit", varLine):
         return 1460;
+      case KeywordHandler.keywordExists("Query", varLine):
+        return 1459;
       case KeywordHandler.keywordExists("Notification", varLine):
         return 1455;
       case KeywordHandler.keywordExists("Blob", varLine):
