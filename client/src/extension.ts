@@ -154,6 +154,29 @@ export function activate(context: ExtensionContext) {
 
 	context.subscriptions.push(sortVariablesDisp);
 
+	let translateDisp = commands.registerCommand("alvarhelper.TranslateVariables", () => {
+		const bluebird = require('bluebird');
+		const fs = bluebird.promisifyAll(require('fs'));
+		const translate = require('./components/translate');
+
+		fs
+			.readFileAsync(path.resolve('C:/Users/raa/Documents/Development/NAV/BilagScan/app/Translations/Invoice Import.g.xlf'))
+			.then((xlf: any) => {
+				return translate(xlf, 'en', 'da');
+			})
+			.then((output: any) => {
+				return fs.writeFileAsync('C:/Users/raa/Documents/Development/NAV/BilagScan/app/Translations/Invoice Import.dk.xlf', output);
+			})
+			.then(() => {
+				console.log('done');
+			})
+			.catch((err:any) => {
+				console.log(err);
+			});
+	});
+
+	context.subscriptions.push(translateDisp);
+
 	// Push the disposable to the context's subscriptions so that the 
 	// client can be deactivated on extension deactivation
 	context.subscriptions.push(disposable);
