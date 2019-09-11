@@ -137,7 +137,8 @@ export class KeywordHandler {
       "SelectStr",
       "Editable",
       "FieldError",
-      "Round"
+      "Round",
+      "Database"
 
     ];
     
@@ -165,6 +166,14 @@ export class KeywordHandler {
       "UseRequestPage",
       "Preview",
       "TableCaption",
+      "Modify",
+      "SetAutoCalcFields",
+      "ModifyAll",
+      "StrMenu",
+      "Close",
+      "GetRangeMin",
+      "GetRangeMax",
+      "CompressArray"
       
     ];
 
