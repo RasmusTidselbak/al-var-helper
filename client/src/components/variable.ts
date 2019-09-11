@@ -93,14 +93,14 @@ export class VariableHandler {
     switch (true) {
       case KeywordHandler.keywordExists("Record", varLine):
         return 1500;
+        case KeywordHandler.keywordExists("Codeunit", varLine):
+          return 1495;
       case KeywordHandler.keywordExists("Page", varLine):
         return 1490;
       case KeywordHandler.keywordExists("Report", varLine):
         return 1480;
       case KeywordHandler.keywordExists("XmlPort", varLine):
         return 1470;
-      case KeywordHandler.keywordExists("Codeunit", varLine):
-        return 1460;
       case KeywordHandler.keywordExists("Query", varLine):
         return 1459;
       case KeywordHandler.keywordExists("Notification", varLine):
