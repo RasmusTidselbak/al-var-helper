@@ -17,7 +17,7 @@ export class KeywordHandler {
         this.keywords.forEach((keyword) => {
           if (word.toUpperCase() == keyword.toUpperCase()) {
             word = keyword;
-            if (this.functionKeywords.includes(word) && (words[i+1] !== "(") && words[i+2] !== "=") {
+            if (this.functionKeywords.includes(word) && (words[i+1] !== "(") && words[i+2] !== "=" && words[i+1] !== ":") {
               word += "()";
             }
           }
