@@ -41,10 +41,6 @@
             {
                 "command": "alvarhelper.SortVariables",
                 "title": "AL-Var: Sort Variables"
-            },
-            {
-                "command": "alvarhelper.TranslateVariables",
-                "title": "AL-Var: Translate Variables"
             }
         ],
         "keybindings": [
@@ -66,6 +62,12 @@
                         "type": "string",
                         "default": "",
                         "description": "Remove prefix's from variable names."
+                    },
+                    
+                    "alVarHelper.ignoreALSuffix": {
+                        "type": "string",
+                        "default": "",
+                        "description": "Remove suffix's from variable names."
                     }
                 }
             }

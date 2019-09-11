@@ -120,6 +120,13 @@ connection.onCompletion(
         startPos += 8;
       }
     }
+    
+    if (startPos < 0) {
+      startPos = line.toUpperCase().indexOf("ENUM");
+      if (startPos >= 0) {
+        startPos += 4;
+      }
+    }
 
     line = line.substring(startPos);
 
@@ -149,6 +156,13 @@ connection.onCompletion(
         let prefixLine = line.substr(0, prefix.length);
         if (prefix === prefixLine) {
           line = line.substr(prefixLine.length);
+        }
+      });
+
+      ignoreALSuffix.forEach((suffix) => {
+        let suffixLine = line.substr(line.length - suffix.length, line.length);
+        if (suffix === suffixLine){
+          line = line.substr(0, line.length - suffix.length);
         }
       });
 
@@ -1398,14 +1412,17 @@ interface Settings {
 
 interface alVarHelper {
   ignoreALPrefix: string;
+  ignoreALSuffix: string;
 }
 
 let ignoreALPrefix: string[];
+let ignoreALSuffix: string[];
 //alVarHelper.ignoreALPrefix
 
 connection.onDidChangeConfiguration((change) => {
   let settings = <Settings>change.settings;
   ignoreALPrefix = settings.alVarHelper.ignoreALPrefix.split(";") || [];
+  ignoreALSuffix = settings.alVarHelper.ignoreALSuffix.split(";") || [];
 });
 
 // Listen on the connection

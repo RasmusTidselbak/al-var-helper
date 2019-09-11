@@ -77,6 +77,13 @@
 			"${1:myBoolean}: Boolean;$0"
 		]
 	},
+	"Variable: Enum": {
+		"prefix": "Enum",
+		"body": [
+			"${2:v}: Enum ${1};$0"
+		],
+		"description": "Insert a new Enum variable"
+	},
 
 
 	"Variable Template: Record": {
@@ -120,6 +127,13 @@
 			"${2:v}: TestPage ${1};$0"
 		],
 		"description": "Insert a new test page variable"
+	},
+	"Variable Template: Enum": {
+		"prefix": "tenum",
+		"body": [
+			"${2:v}: Enum ${1};$0"
+		],
+		"description": "Insert a new Enum variable"
 	}
 
 	
