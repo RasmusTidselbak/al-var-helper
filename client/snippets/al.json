@@ -60,7 +60,7 @@
 		]
 	},
 	"Variable: Text":{
-		"prefix": "Text",
+		"prefix": "tText",
 		"body":[
 			"${3:myText}: Text${1:[${2:20}]};$0"
 		]
