@@ -120,7 +120,7 @@ connection.onCompletion(
         startPos += 8;
       }
     }
-    
+
     if (startPos < 0) {
       startPos = line.toUpperCase().indexOf("ENUM");
       if (startPos >= 0) {
@@ -161,7 +161,7 @@ connection.onCompletion(
 
       ignoreALSuffix.forEach((suffix) => {
         let suffixLine = line.substr(line.length - suffix.length, line.length);
-        if (suffix === suffixLine){
+        if (suffix === suffixLine) {
           line = line.substr(0, line.length - suffix.length);
         }
       });
@@ -169,11 +169,12 @@ connection.onCompletion(
       line = line.trim();
 
       exact = line.replace(/\W/g, "");
-      // exact = exact.replace(/ /g, "");
       if (tempRec) {
         exact = "Temp" + exact;
       }
 
+      exact = exact.replace(/^(\d|\.)+/gm, "");
+      
       fullDoc.indexOf(exact) >= 0 ? (warn = true) : (warn = false);
 
       CompletionItems.push({
@@ -182,7 +183,7 @@ connection.onCompletion(
         data: { text: exact, warning: warn }
       });
 
-      short = line.replace(/"/g, "");
+      short = line.replace(/"/g, "");      
       words = short.match(/[A-Z][a-z]*|[a-z]+/g); // split CollectionOfWords into single words
       short = words.join(" ");
       words = short.split(" ");
@@ -1366,6 +1367,8 @@ connection.onCompletion(
         short = "Tmp" + short;
       }
 
+      short = short.replace(/^(\d|\.)+/gm, "");
+
       fullDoc.indexOf(short) >= 0 ? (warn = true) : (warn = false);
       CompletionItems.push({
         label: "vShort",
@@ -1377,6 +1380,9 @@ connection.onCompletion(
       if (tempRec) {
         tag = "Tmp" + tag;
       }
+      
+      tag = tag.replace(/^(\d|\.)+/gm, "");
+
       fullDoc.indexOf(tag) >= 0 ? (warn = true) : (warn = false);
       CompletionItems.push({
         label: "vTag",
