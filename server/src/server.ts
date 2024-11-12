@@ -101,6 +101,13 @@ connection.onCompletion(
     }
 
     if (startPos < 0) {
+      startPos = line.toUpperCase().indexOf("XMLPORT");
+      if (startPos >= 0) {
+        startPos += 7;
+      }
+    }
+
+    if (startPos < 0) {
       startPos = line.toUpperCase().indexOf("QUERY");
       if (startPos >= 0) {
         startPos += 5;
